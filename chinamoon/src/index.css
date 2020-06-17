@@ -11,3 +11,45 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+#bg1{
+  background-color:#000000;
+}
+
+
+
+#img1{
+ width:400px;
+ height: 320px;
+ background-image: url(./images/image_03.jpg); 
+ 
+ margin-bottom:20px ;
+
+}
+
+#img2{
+ width:400px;
+ height:320px; 
+ background-image: url(./images/image_08.jpg); 
+ 
+ margin-bottom:20px ;
+
+}
+
+
+#img3{
+ width:400px;
+ height:320px;  
+ background-image: url(./images/image_07.jpg); 
+ 
+ margin-bottom:20px ;
+
+}
+
+#img4{
+ width:400px;
+ height:  320px; 
+ background-image: url(./images/image_08.jpg); 
+ 
+ margin-bottom:20px ;
+
+}
