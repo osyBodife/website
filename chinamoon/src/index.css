@@ -12,7 +12,7 @@ code {
     monospace;
 }
 #bg1{
-  background-color:#000000;
+  background-color:#e0ebeb;
 }
 
 
@@ -22,7 +22,7 @@ code {
  height: 320px;
  background-image: url(./images/image_03.jpg); 
  
- margin-bottom:20px ;
+ margin-bottom:2px ;
 
 }
 
@@ -31,7 +31,7 @@ code {
  height:320px; 
  background-image: url(./images/image_08.jpg); 
  
- margin-bottom:20px ;
+ margin-bottom:2px ;
 
 }
 
@@ -41,7 +41,7 @@ code {
  height:320px;  
  background-image: url(./images/image_07.jpg); 
  
- margin-bottom:20px ;
+ margin-bottom:2px ;
 
 }
 
@@ -50,6 +50,42 @@ code {
  height:  320px; 
  background-image: url(./images/image_08.jpg); 
  
- margin-bottom:20px ;
+ margin-bottom:2px ;
 
+}
+#footer{
+  background-color: #ffffff;
+  margin-top:20px ;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+#copyright{
+  background-color: #000000;
+  border-top: 1px solid; 
+  border-color: #000000;
+ text-align: center;
+  margin: auto;
+  color: #ffffff;
+  
+ 
+}
+
+
+#loginForm{
+  padding: 50px;
+  width: 50%;
+  margin:auto;
+  
+}
+
+
+#clickable{
+  cursor:pointer;
+  color:#ffffff;
+   background-color:gray;
+  border-bottom: 1px solid #ffffff;
+ 
+}
+#clickable:hover{
+background-color: #ff9900;
 }

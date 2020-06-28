@@ -1,13 +1,22 @@
 import React from 'react';
-import './App.css';
-import NavBar from './components/navBar';
-import SlideShow from './common/slideShow';
+import { Route, Redirect, Switch } from "react-router-dom";
+import Menu from "./components/menu";
+import LoginForm from "./components/loginForm";
+import "./App.css";
+import RegisterForm from './components/registerForm';
+
+
 
 function App() {
   return (
     <main className="container">
-      <NavBar />
-      <SlideShow />
+      <Switch>
+        <Route path="/login" component={LoginForm} />
+        <Route path="/menu" component={Menu} />
+        <Route path="/register" component={RegisterForm} />
+        <Redirect from="/" exact to="menu" />
+       
+      </Switch>
     </main>
   );
 }
