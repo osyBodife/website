@@ -1,46 +1,54 @@
-import React from "react";
+import React, { Component } from "react";
+import auth from "../services/authService";
+import { Link } from "react-router-dom";
+import Table from "../common/table";
+//import Like from "../common/like";
 
+class menusTable extends Component {
+  
+  columns = [
+    {
+      path: "title",
+      label: "Menu",
+      content: (menu) => <Link to={`/menu/${menu._id}`}>{menu.title}</Link>,
+    },
+    { path: "category.name", label: "Menu Type" },
+    
+    { path: "price", label: "Price" }
+    
+  ];
 
-const MenuTable = (props) => {
-  const { menus, onDelete,  onSort } = props;
-  return (
-    <table className="table">
-      <thead>
-        <tr>
-          <th onClick={() => onSort("title")} scope="col">
-            Menu
-          </th>
-          <th onClick={() => onSort("category.name")} scope="col">
-           Menu Type
-          </th>
-          
-          <th onClick={() => onSort("price")} scope="col">
-            Price
-          </th>
-          <th />
-         
-        </tr>
-      </thead>
-      <tbody>
-        {menus.map((menu) => (
-          <tr key={menu._id}>
-            <td>{menu.title}</td>
-            <td>{menu.category.name}</td>
-            <td>{menu.price}</td>
-           
-            <td>
-              <button
-                onClick={() => onDelete(menu)}
-                className="tbn btn-danger btn-sm"
-              >
-                Delete
-              </button>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  );
-};
+  // extract delete code and create an object container
+  deleteColumn = {
+    key: "delete",
+    content: (menu) => (
+      <button
+        onClick={() => this.props.onDelete(menu)}
+        className="tbn btn-danger btn-sm"
+      >
+        Delete
+      </button>
+    ),
+  };
 
-export default MenuTable;
+  constructor() {
+    super();
+    const user = auth.getCurrentUser();
+    if (user && user.isAdmin) {
+      this.columns.push(this.deleteColumn);
+    }
+  }
+  render() {
+    const { menus, onSort, sortColumn } = this.props;
+    return (
+      <Table
+        data={menus}
+        onSort={onSort}
+        sortColumn={sortColumn}
+        columns={this.columns}
+      />
+    );
+  }
+}
+
+export default menusTable;

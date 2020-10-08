@@ -9,13 +9,13 @@ const NavBar = () => {
       </Link>
 
       <div className="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li classNames="nav-item ">
+        <ul className="navbar-nav">
+          <li className="nav-item ">
             <NavLink className="nav-link" to="/login">
               About Us
             </NavLink>
           </li>
-          <li class="nav-item">
+          <li className="nav-item">
             <NavLink className="nav-link" to="/menu">
               Menu List
             </NavLink>

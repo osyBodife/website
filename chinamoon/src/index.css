@@ -89,3 +89,6 @@ code {
 #clickable:hover{
 background-color: #ff9900;
 }
+.clickhead{
+  cursor: pointer;
+}

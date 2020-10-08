@@ -37,7 +37,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div className="col-4"> &nbsp; </div>
+          <div className="col-4"> Connect with us </div>
           <div className="col-4">
            <Link to='login'>Management Portal</Link>
           </div>

@@ -2,14 +2,14 @@ import React from "react";
 
 const MenuListGroup = (props) => {
   
-  const { categoryLists, onSelectCategory, selectedCategory } = props;
+  const { categoryLists, onSelectCategory, selectedCategory,textProperty, valueProperty } = props;
    
   return (
-    <ul class="list-group">
+    <ul className="list-group">
       {categoryLists.map((category) => (
         <li
           id="clickable"
-          key={category._id}
+          key={category[valueProperty]}
           onClick={() => onSelectCategory(category)}
           className={
             category === selectedCategory
@@ -18,23 +18,28 @@ const MenuListGroup = (props) => {
           }
           
         >
-          {category.name}
+          {category[textProperty]}
         </li>
       ))}
     </ul>
   );
+}
+
+MenuListGroup.defaultProps = {
+  textProperty: 'name',
+  valueProperty:'_id'
 }
  
 export default MenuListGroup;
 
 
 /*
-<ul class="list-group">
-  <li class="list-group-item">Cras justo odio</li>
-  <li class="list-group-item">Dapibus ac facilisis in</li>
-  <li class="list-group-item">Morbi leo risus</li>
-  <li class="list-group-item">Porta ac consectetur ac</li>
-  <li class="list-group-item">Vestibulum at eros</li>
+<ul className="list-group">
+  <li className="list-group-item">Cras justo odio</li>
+  <li className="list-group-item">Dapibus ac facilisis in</li>
+  <li className="list-group-item">Morbi leo risus</li>
+  <li className="list-group-item">Porta ac consectetur ac</li>
+  <li className="list-group-item">Vestibulum at eros</li>
 </ul>
 
 

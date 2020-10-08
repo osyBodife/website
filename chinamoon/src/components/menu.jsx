@@ -34,7 +34,7 @@ class Menu extends Component {
     this.setState({ menus });
   };
 
-  handleSearch = (query) => {
+  handleSearch = (query) => {    
     this.setState({
       searchQuery: query,
       selectedCategory: null,
@@ -49,6 +49,7 @@ class Menu extends Component {
   handleCategorySelect = (category) => {
     this.setState({
       selectedCategory: category,
+      searchQuery: "",
       currentPage: 1,
     });
   };
@@ -113,7 +114,7 @@ class Menu extends Component {
             </div>
 
             <div className="col">
-              <Link to="/menus/new" className="btn btn-secondary">
+              <Link to="/menu/new" className="btn btn-secondary">
                 Add New Menu
               </Link>
               <p>Showing {totalCount} menus in the data base </p>

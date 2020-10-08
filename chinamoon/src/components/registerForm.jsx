@@ -1,23 +1,32 @@
-import React, { Component } from "react";
+import React from "react";
+import Joi from "joi-browser";
 import NavBar from "./adminNavBar";
+import Form from "../common/form"
 
-class RegisterForm extends Component {
+class RegisterForm extends Form {
   state = {
-    account: { username: "", password: "" },
+    data: { name: "", username: "", password: "" },
+    errors:{}
   };
 
-  handleChange = ({ currentTarget: input }) => {
-    const account = { ...this.state.account };
+  schema = {
+    name: Joi.string().required().label("Name"),
+    username: Joi.string()
+      .required()
+      .label("Username")
+      .email({ minDomainAtoms: 2 }),
+    password: Joi.string().required().min(5).label("Password"),
+    
+  };
 
-    account[input.name] = input.value;
-    this.setState({ account });
-  };
-  handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(e.target.value);
-  };
+  
+  doSubmit= ( )=>{
+    console.log (" Form Submitted");
+  }
+  
+  
   render() {
-    const { account } = this.state;
+    
     return (
       <>
         <div>
@@ -25,40 +34,15 @@ class RegisterForm extends Component {
           <div id="loginForm">
             <h2>Register User Form</h2>
             <form onSubmit={this.handleSubmit}>
-              <div className="form-group">
-                <label htmlFor="username">Name</label>
-                <input
-                  id="name"
-                  value={account.name}
-                  onChange={this.handleChange}
-                  name="name"
-                  type="text"
-                  className="form-control"
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="username">UserName</label>
-                <input
-                  id="username"
-                  value={account.username}
-                  onChange={this.handleChange}
-                  name="username"
-                  type="text"
-                  className="form-control"
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="password">Password</label>
-                <input
-                  id="password"
-                  type="text"
-                  className="form-control"
-                  value={account.password}
-                  onChange={this.handleChange}
-                  name="password"
-                />
-              </div>
-              <button className="btn btn-primary">Login</button>
+            {this.renderInput("name", "Name")}
+
+            {this.renderInput("username", "Username")}
+             {this.renderInput("password", "Password", "password")}           
+
+            {this.renderButton("Register")}
+              
+
+            
             </form>
           </div>
         </div>

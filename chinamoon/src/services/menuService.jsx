@@ -61,24 +61,35 @@ export function getMenus() {
   return menus;
 }
 
-export function getMMenu(id) {
+export function getMenu(id) {
   return menus.find((m) => m._id === id);
 }
 
 export function saveMenu(menu) {
-  let menuInDb = menus.find((m) => m._id === menu._id) || {};
+  //first check if the menu already exists in the list of menus
+  // if it does, we assign it to a variable 
+  // this is necessary to be able to access elements in the object , 
+  // then be able to edit them otherwise we cannot access it
+  let menuInDb = menus.find((m) => m._id === menu._id) || {};  
+  //add elements to menuInDb object
   menuInDb.title = menu.title;
+  //find the category menu object belongs to
+  // and assign it to menuInDb
   menuInDb.category = categoriesAPI.categories.find(
     (g) => g._id === menu.categoryId
   );
-  
-
+// add or edit price
+  menuInDb.price = menu.price;
+//add menu id if no id exists
+//this applies to new menu
   if (!menuInDb._id) {
     menuInDb._id = Date.now().toString();
     menus.push(menuInDb);
   }
-
+  //console.log(menuInDb);
+  //terminate fn with a return statement
   return menuInDb;
+  
 }
 
 export function deletemenu(id) {
