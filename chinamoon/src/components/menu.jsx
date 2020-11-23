@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import MenuListGroup from "./menuListGroup";
 import { getCategories } from "../services/categoryService";
 import { getMenus } from "../services/menuService";
+//import { getMenus } from "../backend/server.js";
 import SlideShow from "../common/slideShow";
 import SearchBox from "../common/searchBox";
 import Footer from "../common/footer";
@@ -11,6 +12,7 @@ import NavBar from "./navBar";
 import MenuTable from "./menuTable";
 import Pagination from "../common/pagination";
 import { paginate } from "../utils/pagination";
+
 
 class Menu extends Component {
   state = {

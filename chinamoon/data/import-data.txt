@@ -1,0 +1,12 @@
+Notes
+codes used to import data into db
+1. do cmd to get windows command line (works only windows cmd)
+2. cd to the directory where the json files are located in this example ;
+ cd gt/website/chinamoon/data
+3. the run the code for each json file/collection
+
+
+mongoimport --db chinamoondb --collection menus --drop --file menu-data.json --jsonArray
+
+mongoimport --db chinamoondb --collection categories --drop --file category-data.json --jsonArray
+
