@@ -1,11 +1,12 @@
 const Joi = require("joi");
+const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
 
 const { Menu, validate } = require("../models/menu");
 const { Category } = require("../models/category");
 
-const mongoose = require("mongoose");
+
 
 router.get("/", async (req, res) => {
   // find all documents
@@ -16,7 +17,7 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/:id", async (req, res) => {
-  const menu = await Menu.find((c) => c._id === req.params.id);
+    const menu = await Menu.findById(req.params.id); 
 
   if (!menu) {
     res
@@ -33,7 +34,7 @@ router.post("/", async (req, res) => {
   if (error) return res.status(400).send(error.details[0].message);
   //access and obtain category with categoryId provided by client
   const category = await Category.findById(req.body.categoryId);
-  if (!category) return res.status(400).send("Invalid genre.");
+  if (!category) return res.status(400).send("Invalid category.");
   //create an instance of Menu class based on data obatined from query
   //and client input
   //the instance is what is saved in Db
@@ -51,12 +52,14 @@ router.post("/", async (req, res) => {
   res.send(menu);
 });
 
-///copied from movie.js
 
 router.put("/:id", async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
-  //find the menu category
+  //bcos we would need to add category._id and category.name 
+  //to the menu object we must find category object associated with menu
+  //once found, we assign it a variable and use the variable 
+  //to add the ppties
   const category = await Category.findById(req.body.categoryId);
   if (!category) return res.status(400).send("Invalid category.");
   //find menu with id provided
@@ -87,7 +90,7 @@ router.delete("/:id", async (req, res) => {
   const menu = await Menu.findByIdAndRemove(req.params.id);
 
   if (!menu)
-    return res.status(404).send("The menu with the given ID was not found.");
+    return res.status(404).send(`The menu with given Id:${req.params.id} not found`);
 
   res.send(menu);
 });

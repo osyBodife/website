@@ -9,6 +9,7 @@ const { Category } = require("./models/category");
 
 const mongoose = require("mongoose");
 
+mongoose.set('debug', true);
 mongoose.set("useNewUrlParser", true);
 mongoose.set("useUnifiedTopology", true);
 mongoose.set("useFindAndModify", false);
@@ -26,7 +27,7 @@ mongoose
 
 async function createMenu() {
   const menu = new Menu({
-    title: "Akamu",
+    title: "Oat Meal",
     category: { _id: "5b21ca3eeb7f6fbccd471818", name: "Breakfast" },
     price: 3.99,
   });
