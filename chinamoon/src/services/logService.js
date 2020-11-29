@@ -19,7 +19,14 @@ function log(error) {
   //Sentry.captureException(error);
 }
 
-export default {
+// export default {
+//   init,
+//   log,
+// };
+
+
+ const logger ={
   init,
   log,
 };
+export default logger;

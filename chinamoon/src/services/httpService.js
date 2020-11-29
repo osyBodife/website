@@ -1,4 +1,5 @@
 import axios from "axios";
+//const axios = require('axios');
 //import {getJwt} from './authService'
 //import * as Sentry from "@sentry/browser";
 
@@ -31,10 +32,19 @@ function setJwt(jwt) {
   axios.defaults.headers.common["x-auth-token"] = jwt;
 }
 
-export default {
+// export default {
+//   get: axios.get,
+//   post: axios.post,
+//   put: axios.put,
+//   delete: axios.delete,
+//   setJwt,
+// };
+const http = {
   get: axios.get,
   post: axios.post,
   put: axios.put,
   delete: axios.delete,
   setJwt,
 };
+  
+ export default http;

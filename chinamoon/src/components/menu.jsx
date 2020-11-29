@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import _ from "lodash";
 import { Link } from "react-router-dom";
 import MenuListGroup from "./menuListGroup";
-import { getCategories } from "../services/categoryService";
+//import { getCategories } from "../services/categoryService";
+import { getCategories } from "../services/dataCategories";
 import { getMenus } from "../services/menuService";
-//import { getMenus } from "../backend/server.js";
 import SlideShow from "../common/slideShow";
 import SearchBox from "../common/searchBox";
 import Footer from "../common/footer";
@@ -12,7 +12,6 @@ import NavBar from "./navBar";
 import MenuTable from "./menuTable";
 import Pagination from "../common/pagination";
 import { paginate } from "../utils/pagination";
-
 
 class Menu extends Component {
   state = {
@@ -25,8 +24,12 @@ class Menu extends Component {
     sortColumn: { path: "title", order: "asc" },
   };
 
-  componentDidMount() {
-    const categories = [{ _id: "", name: "All Menu" }, ...getCategories()];
+ async componentDidMount() {
+    //const categories = [{ _id: "", name: "All Menu" }, ...getCategories()];
+    const { data } = await getCategories();
+    //console.log("data", data);
+
+    const categories = [{ _id: "", name: "All Menu", ...data }];
     this.setState({ menus: getMenus(), categories: categories });
   }
 
@@ -36,7 +39,7 @@ class Menu extends Component {
     this.setState({ menus });
   };
 
-  handleSearch = (query) => {    
+  handleSearch = (query) => {
     this.setState({
       searchQuery: query,
       selectedCategory: null,
