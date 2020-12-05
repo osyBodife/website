@@ -13,10 +13,28 @@ class menusTable extends Component {
       content: (menu) => <Link to={`/menu/${menu._id}`}>{menu.title}</Link>,
     },
     { path: "category.name", label: "Menu Type" },
-    
-    { path: "price", label: "Price" }
-    
+
+    { path: "price", label: "Price" },
+    {
+      key: "delete",
+      content: (menu) => (
+        <button
+          onClick={() => this.props.onDelete(menu)}
+          className="tbn btn-danger btn-sm"
+        >
+          Delete
+        </button>
+      ),
+    },
   ];
+
+  constructor() {
+    super();
+    const user = auth.getCurrentUser();
+    if (user && user.isAdmin) {
+      this.columns.push(this.deleteColumn);
+    }
+  }
 
   // extract delete code and create an object container
   deleteColumn = {
@@ -31,13 +49,6 @@ class menusTable extends Component {
     ),
   };
 
-  constructor() {
-    super();
-    const user = auth.getCurrentUser();
-    if (user && user.isAdmin) {
-      this.columns.push(this.deleteColumn);
-    }
-  }
   render() {
     const { menus, onSort, sortColumn } = this.props;
     return (

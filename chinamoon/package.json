@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
+    "cors-anywhere": "^0.4.3",
     "esm": "^3.2.25",
     "font-awesome": "^4.7.0",
     "joi-browser": "^13.4.0",

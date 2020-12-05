@@ -52,6 +52,18 @@ class Form extends Component {
   };
 
   handleChange = ({ currentTarget: input }) => {
+    /*
+    Note
+    1. Each input field has onChange fn
+    2. the fn gets the input, validates it
+    3. rtn error or correct data
+    4. updates the state for this input field
+    In otherwords for each change the state is updated
+    5.When the ENTIRE FORM  is submitted, onSubmit() kicks in
+    6. onSubmit() is a reference the actual fn handleSubmit() which
+    7. It the handleSubmit() decides what happens to the submitted data
+
+    */
     //note the difference btw cloning and destructuring
     //clone errors , to able to access it here
     //cloning makes ANOTHER copy
@@ -69,6 +81,8 @@ class Form extends Component {
     const data ={...this.state.data};
     //add items to the data object
     data[input.name] = input.value;
+    //with our data and error object
+    //we set the state
     this.setState({ data, errors });
     //console.log("data now", this.state.data)
   };

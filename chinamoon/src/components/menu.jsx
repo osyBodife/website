@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import _ from "lodash";
 import { Link } from "react-router-dom";
 import MenuListGroup from "./menuListGroup";
-//import { getCategories } from "../services/categoryService";
-import { getCategories } from "../services/dataCategories";
-import { getMenus } from "../services/menuService";
+import { getCategories } from "../services/categoryService";
+import { getMenus, deleteMenu } from "../services/menuService";
+import { toast } from "react-toastify";
+//import { getCategories } from "../services/dataCategories";
+//import { getMenus } from "../services/dataMenus";
 import SlideShow from "../common/slideShow";
 import SearchBox from "../common/searchBox";
 import Footer from "../common/footer";
@@ -24,19 +26,44 @@ class Menu extends Component {
     sortColumn: { path: "title", order: "asc" },
   };
 
- async componentDidMount() {
+  async componentDidMount() {
     //const categories = [{ _id: "", name: "All Menu" }, ...getCategories()];
+    //this.setState({ menus: getMenus(), categories: categories });
     const { data } = await getCategories();
     //console.log("data", data);
 
-    const categories = [{ _id: "", name: "All Menu", ...data }];
-    this.setState({ menus: getMenus(), categories: categories });
+    const { data: menus } = await getMenus();
+
+    const categories = [{ _id: "", name: "All Menu" }, ...data];
+    this.setState({ menus, categories });
+
+
+
+
   }
 
-  handleDelete = (menu) => {
-    const menus = this.state.menus.filter((m) => m._id !== menu._id);
+  handleDelete = async (menu) => {
+    const originalMenus = this.state.menus;
+    //remove menu from menus array
+    const menus = originalMenus.filter((m) => m._id !== menu._id);
+    //update the state after change in the list of menus
 
     this.setState({ menus });
+    //invoke the delete fn to actually delete the particular menu
+
+    //await deleteMenu(menu._id)
+
+    //it is possible the menu has already been deleted
+    //so we should wrap the code in try block
+    try {
+      await deleteMenu(menu._id);
+    } catch (ex) {
+      if (ex.response && ex.response.status === 404)
+        toast.error("This menu has already been deleted ");
+      //if get this error, we should return to status quo by setting the
+      //state to original value
+      this.setState({ menus: originalMenus });
+    }
   };
 
   handleSearch = (query) => {
@@ -90,10 +117,8 @@ class Menu extends Component {
     return { totalCount: filtered.length, data: menus };
   };
 
-  render() {
-    const { length: count } = this.state.menus;
-    if (count === 0) return "There are no menus";
 
+  render() {
     const {
       categories,
       selectedCategory,
@@ -104,10 +129,12 @@ class Menu extends Component {
     } = this.state;
 
     const { totalCount, data: menus } = this.getPageData();
+    
     return (
       <>
         <div>
-          <NavBar />
+                    <NavBar />
+                   
           <SlideShow />
           <div className="row">
             <div className="col-2">
@@ -122,7 +149,8 @@ class Menu extends Component {
               <Link to="/menu/new" className="btn btn-secondary">
                 Add New Menu
               </Link>
-              <p>Showing {totalCount} menus in the data base </p>
+              <p>{`Showing ${totalCount} menus in the data base `}</p>
+
               <SearchBox value={searchQuery} onQuery={this.handleSearch} />
               <MenuTable
                 menus={menus}

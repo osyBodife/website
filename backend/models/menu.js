@@ -7,7 +7,7 @@ const Schema = mongoose.Schema;
 
 //create an instance of the Schema
 const menuSchema = new Schema({
-  //_id: String,
+  //_id: mongoose.Types.ObjectId,
   title: {
     type: String,
     required: true,

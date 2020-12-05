@@ -9,10 +9,11 @@ const { Category } = require("./models/category");
 
 const mongoose = require("mongoose");
 
-mongoose.set('debug', true);
+//mongoose.set('debug', true);
 mongoose.set("useNewUrlParser", true);
 mongoose.set("useUnifiedTopology", true);
 mongoose.set("useFindAndModify", false);
+
 
 app.use("/api/categories", categories_router);
 app.use("/", home_router);

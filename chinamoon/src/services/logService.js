@@ -15,7 +15,7 @@ function init() {
 
 function log(error) {
   // Raven.captureException(error);
-  console.log(error);
+  console.error(error);
   //Sentry.captureException(error);
 }
 
