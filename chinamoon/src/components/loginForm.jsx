@@ -6,15 +6,24 @@ import Form from "../common/form"
 
 class LoginForm extends Form {
   state = {
-    data: { username: "", password: "" },
+    data: { 
+      username: "",
+     password: "",
+    nrAttempts:0,
+    lastActiveAt: ""
+   },
     errors: {},
   };
   // using joi library for validation
   //create a schema
+  // date: { type: Date, default: Date.now },
 
   schema = {
     username: Joi.string().required().label("Username"),
     password: Joi.string().required().label("Password"),
+    nrAttempts:Joi.number().integer(),
+    lastActiveAt: Date.now()
+   
   };
  
 

@@ -9,6 +9,7 @@ codes used to import data into db
 mongoimport --db chinamoondb --collection menus --drop --file menu-data.json --jsonArray
 
 mongoimport --db chinamoondb --collection categories --drop --file category-data.json --jsonArray
+mongoimport --db chinamoondb --collection adminusertypes --drop --file adminusertype-data.json --jsonArray
 
 
 { "_id" : {"$oid":"5fba14189ea63661cc6d1a05"},

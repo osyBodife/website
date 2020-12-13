@@ -28,26 +28,26 @@ class Form extends Component {
     // to validate each field individually,
     // we need a new object that defines the input field and its value
     // to do so dynamically, we would use computed propertiess [xxy]
-    const eachFieldObj = { [name]: value };
+    const eachInputFieldObj = { [name]: value };
     // to validate the above oject, we need a new schema for it
     // while the property is dynamically obtained, its value is
     // obtained from the Form schema or this.schema
-    const eachFieldSchema = { [name]: this.schema[name] };
-    const { error } = Joi.validate(eachFieldObj, eachFieldSchema);
+    const eachInputFieldSchema = { [name]: this.schema[name] };
+    const { error } = Joi.validate(eachInputFieldObj, eachInputFieldSchema);
     //details[0] bcos ONLY one array element at a time
     return error ? error.details[0].message : null;
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    //console.log(e.target.value);
+    //console.log("submitted data", e.target.value);
     const errors = this.validate();
     //console.log(errors);
     if (errors != null) {
       this.setState({ errors });
       return;
     }
-
+// invoke the doSubmit() fn here
     this.doSubmit();
   };
 
@@ -60,8 +60,9 @@ class Form extends Component {
     4. updates the state for this input field
     In otherwords for each change the state is updated
     5.When the ENTIRE FORM  is submitted, onSubmit() kicks in
-    6. onSubmit() is a reference the actual fn handleSubmit() which
-    7. It the handleSubmit() decides what happens to the submitted data
+    6. onSubmit() is a reference the actual fn handleSubmit(), 
+    7. It is the handleSubmit() that decides what happens to the submitted data
+    8. it handleSubmit() that invokes our doSubmit() fn
 
     */
     //note the difference btw cloning and destructuring

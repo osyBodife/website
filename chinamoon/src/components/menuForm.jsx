@@ -1,7 +1,7 @@
 import React from "react";
 import Form from "../common/form";
 import NavBar from "./adminNavBar";
-//import Joi from "joi-browser";
+import Joi from "joi-browser";
 import { getCategories } from "../services/categoryService";
 import { getMenu, saveMenu } from "../services/menuService";
 
@@ -12,14 +12,14 @@ class MenuForm extends Form {
     errors: {},
   };
 
-  // schema = {
-  //   _id: Joi.string(),
-  //   title: Joi.string().required().label("Menu"),
+  schema = {
+    _id: Joi.string(),
+    title: Joi.string().required().label("Menu"),
 
-  //   categoryId: Joi.string().required().label("Menu Type"),
+    categoryId: Joi.string().required().label("Menu Type"),
 
-  //   price: Joi.number().required().min(0).max(100).label("Price"),
-  // };
+    price: Joi.number().required().min(0).max(100).label("Price"),
+  };
 
   // refactoring with function ie separation of responsibilities
   async populateCategories() {
@@ -35,7 +35,6 @@ class MenuForm extends Form {
       if (menuId === "new") return;
       //we use the menuId obtained from url to fetch the menu uing getMenu() fn
       //get data and rename it to menu
-      //enclose the code in a try & catch block
       const { data: menu } = await getMenu(menuId);
       //if our menu exists, we update the state
       //extract the exact data we need
@@ -94,7 +93,8 @@ class MenuForm extends Form {
       price: menu.price,
     };
   }
-  doSubmit = async() => {
+  //define our fn, where it receives it arguments
+  doSubmit = async () => {
     await saveMenu(this.state.data);
     this.props.history.push("/menu");
   };

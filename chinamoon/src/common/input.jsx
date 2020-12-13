@@ -1,7 +1,7 @@
 import React from "react";
 
 //const Input = ({name, type, label, value, error,onChange}) => {
-//we can ...rest operator to further simplify above code as ffs
+//we can use the ...rest operator to further simplify above code as ffs
 const Input = ({ name, label, error, ...rest }) => {
   return (
     <div className="form-group">
