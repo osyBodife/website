@@ -25,13 +25,6 @@ router.get("/:id", async (req, res) => {
     return;
   }
 
-  // if (!menu) {
-  //   res
-  //     .status(404)
-  //     .send(`The menu with given Id:${req.params.id} does not exist`);
-  //   return;
-  // }
-  //res.send(menu);
 });
 
 router.post("/", async (req, res) => {

@@ -3,9 +3,13 @@ const app = express();
 const categories_router = require("./routes/categories");
 const menu_router = require("./routes/menus");
 const home_router = require("./routes/home");
+const adminUserType_router = require("./routes/adminUserTypes");
+//const registerUser_router=require("./routes/registerUsers")
+const adminUser_router=require("./routes/adminUsers")
 app.use(express.json());
 const { Menu } = require("./models/menu");
 const { Category } = require("./models/category");
+const { AdminUserType } = require("./models/adminUserTypes");
 
 const mongoose = require("mongoose");
 
@@ -14,10 +18,13 @@ mongoose.set("useNewUrlParser", true);
 mongoose.set("useUnifiedTopology", true);
 mongoose.set("useFindAndModify", false);
 
-
 app.use("/api/categories", categories_router);
 app.use("/", home_router);
 app.use("/api/menus", menu_router);
+//app.use("/api/menus", menu_router);
+//app.use("/api/register", registerUser_router);
+app.use("/api/adminusertypes", adminUserType_router);
+app.use("/api/adminusers", adminUser_router);
 
 mongoose
   .connect("mongodb://localhost/chinamoondb")
@@ -47,7 +54,7 @@ async function getMenus() {
     .select({ title: 1, category: 1, price: 1 });
   console.log(results);
 }
-getMenus();
+//getMenus();
 
 async function createMenuCategory() {
   const menuCategory = new Category({
@@ -65,6 +72,17 @@ async function getMenuCategories() {
   console.log(results);
 }
 //getMenuCategories();
+
+
+
+async function getAdminUserTypes() {
+  //const results = await Menu.find();
+  //find() method with filters
+  const results = await AdminUserType.find({});
+   
+  console.log("Our Admin User Types", results);
+}
+getAdminUserTypes();
 
 const port = process.env.PORT || 3300;
 // create a listener
